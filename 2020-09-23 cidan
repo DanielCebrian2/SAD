@@ -1,0 +1,58 @@
+#Clase SAD
+
+###Toda la información sacada de jesusninoc https://github.com/jesusninoc/ClasesSAD/blob/master/2020-09-23.md
+
+###Practica de Login con hash que verifica que el archivo existe
+
+```powershell
+# Comprobar el user y password
+ 
+## Almacenar la información en variables, el password se convierte a SHA1
+ 
+[Reflection.Assembly]::LoadWithPartialName("System.Web")
+ 
+$user = "Dani"
+$pass = [System.Web.Security.FormsAuthentication]::HashPasswordForStoringInConfigFile("1234", "SHA1")
+ 
+## Pedir al usuario user y password
+ 
+$user1 = Read-Host "nombre usuario"
+$pass1 = Read-Host "password usuario"
+ 
+$pass2 = [System.Web.Security.FormsAuthentication]::HashPasswordForStoringInConfigFile($pass1, "SHA1")
+ 
+## Comprobar si el usuario y password son correctos
+ 
+if($user1 -eq $user -and $pass -eq $pass2)
+{
+ 
+    ## comprobar si existe el archivo
+
+    if ((Test-Path C:\Users\dani_\Desktop\fichero.txt) -and (Test-Path C:\Users\dani_\Desktop\fichero2.txt))
+    {
+        ## Hacer hash de los archivos
+
+        "Existen los ficheros"
+        $hash=(Get-FileHash C:\Users\dani_\Desktop\fichero.txt).hash
+        $hash2=(Get-FileHash C:\Users\dani_\Desktop\fichero2.txt).hash
+        if($hash -eq $hash2)
+            {
+                Write-Host "Archivos sin modificar"
+            }
+        else
+        {
+                Write-Host "Archivos modificados"
+        }
+    }
+    else
+    {
+        "No existe fichero"
+    }
+}
+else
+{
+    ## Mostrar mensaje si el login es incorrecto
+ 
+    [User32]::MessageBox(0,"Usuario o contraseña incorrectos","¡ERROR!",0)
+}
+```
