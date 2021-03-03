@@ -1,5 +1,8 @@
+
 # Crear Json
+
 ```powershell
+
 $alumnos = '{
   "alumnos": {
     "alumno": [
@@ -20,10 +23,14 @@ $alumnos = '{
     ]
   }
 }' | ConvertFrom-Json
+
+
 ```
 ------------------------------------------------------------------------------------------
 # Enviar correo desde powershell 
+
 ```powershell
+
 $alumnos.alumnos.alumno | %{
 #$_.Nombre, $_.Correo
 
