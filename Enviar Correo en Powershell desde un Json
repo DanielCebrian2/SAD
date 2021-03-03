@@ -21,6 +21,7 @@ $alumnos = '{
   }
 }' | ConvertFrom-Json
 ```
+------------------------------------------------------------------------------------------
 # Enviar correo desde powershell 
 ```powershell
 $alumnos.alumnos.alumno | %{
